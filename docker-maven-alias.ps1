@@ -22,16 +22,36 @@ function Get-MavenHome {
 
 function Run-Maven {
     $m2home = Get-MavenHome
-    docker run -it --rm -v "${m2home}:/var/maven_home/.m2" -v "${PWD}:/data" -w /data dsuite/maven sh -c "mvn $args"
+    docker run -it --rm -v "${m2home}:/var/maven_home/.m2" -v "${PWD}:/maven" -w /maven dsuite/maven bash -c "mvn $args"
 }
 
 function Run-MavenBash {
     $m2home = Get-MavenHome
-    docker run -it --rm -v "${m2home}:/var/maven_home/.m2" -v "${PWD}:/data" -w /data dsuite/maven sh
+    docker run -it --rm -v "${m2home}:/var/maven_home/.m2" -v "${PWD}:/maven" -w /maven dsuite/maven bash
+}
+
+#
+if (test-path alias:mvn) {
+    Remove-Item alias:\mvn
+}
+
+#
+if( (Test-MavenInstall) -eq $true) {
+    if (test-path alias:mvnbash) {
+        Remove-Item alias:\mvnbash
+    }
+    New-Alias mvnbash Run-MavenBash
 }
 
 #
 if( (Test-MavenInstall) -eq $false) {
+    if (test-path alias:mvn) {
+        Remove-Item alias:\mvn
+    }
     New-Alias mvn Run-Maven
+
+    if (test-path alias:mvnbash) {
+        Remove-Item alias:\mvnbash
+    }
     New-Alias mvnbash Run-MavenBash
 }

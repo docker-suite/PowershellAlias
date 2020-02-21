@@ -12,15 +12,34 @@ function Test-GitInstall {
 
 
 function Run-Git {
-    docker run -it --rm -v "${PWD}:/data" -w /data dsuite/maven sh -c "git $args"
+    docker run -it --rm -v "${PWD}:/git" -w /git dsuite/maven bash -c "git $args"
 }
 
 function Run-GitBash {
-    docker run -it --rm -v "${PWD}:/data" -w /data dsuite/maven sh
+    docker run -it --rm -v "${PWD}:/git" -w /git dsuite/maven bash
+}
+
+#
+if (test-path alias:git) {
+    Remove-Item alias:\git
+}
+
+#
+if( (Test-GitInstall) -eq $true) {
+    if (test-path alias:gitbash) {
+        Remove-Item alias:\gitbash
+    }
+    New-Alias gitbash Run-GitBash
 }
 
 #
 if( (Test-GitInstall) -eq $false) {
+    if (test-path alias:git) {
+        Remove-Item alias:\git
+    }
     New-Alias git Run-Git
+    if (test-path alias:gitbash) {
+        Remove-Item alias:\gitbash
+    }
     New-Alias gitbash Run-GitBash
 }

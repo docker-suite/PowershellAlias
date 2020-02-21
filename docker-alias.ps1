@@ -31,12 +31,22 @@ function Get-ContainerIPAddress {
 }
 
 
-New-Alias ds    Stop-Containers
+if (!(test-path alias:ds)) {
+    New-Alias ds Stop-Containers
+}
 
-New-Alias drm   Remove-StoppedContainers
+if (!(test-path alias:drm)) {
+    New-Alias drm Remove-StoppedContainers
+}
 
-New-Alias drmi  Remove-DanglingImages
+if (!(test-path alias:drmi)) {
+    New-Alias drmi Remove-DanglingImages
+}
 
-New-Alias drmv  Remove-DanglingVolumes
+if (!(test-path alias:ddrmvs)) {
+    New-Alias drmv Remove-DanglingVolumes
+}
 
-New-Alias dip   Get-ContainerIPAddress
+if (!(test-path alias:dip)) {
+    New-Alias dip Get-ContainerIPAddress
+}
