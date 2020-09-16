@@ -22,12 +22,12 @@ function Get-MavenHome {
 
 function Run-Maven {
     $m2home = Get-MavenHome
-    docker run -it --rm -v "${m2home}:/var/maven_home/.m2" -v "${PWD}:/maven" -w /maven dsuite/maven bash -c "mvn $args"
+    docker run -it --rm -e http_proxy=${http_proxy} -e https_proxy=${https_proxy} -e no_proxy=${no_proxy} -v "${m2home}:/var/maven_home/.m2" -v "${PWD}:/maven" -w /maven dsuite/maven bash -c "mvn $args"
 }
 
 function Run-MavenBash {
     $m2home = Get-MavenHome
-    docker run -it --rm -v "${m2home}:/var/maven_home/.m2" -v "${PWD}:/maven" -w /maven dsuite/maven bash
+    docker run -it --rm -e http_proxy=${http_proxy} -e https_proxy=${https_proxy} -e no_proxy=${no_proxy} -v "${m2home}:/var/maven_home/.m2" -v "${PWD}:/maven" -w /maven dsuite/maven bash
 }
 
 #

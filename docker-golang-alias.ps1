@@ -12,11 +12,11 @@ function Test-GoInstall {
 
 #
 function Run-Go {
-    docker run -it --rm  -v "${PWD}:/golang" -w /golang golang:alpine sh -c "go $args"
+    docker run -it --rm -e http_proxy=${http_proxy} -e https_proxy=${https_proxy} -e no_proxy=${no_proxy} -v "${PWD}:/golang" -w /golang golang:alpine sh -c "go $args"
 }
 
 function Run-GoBash {
-    docker run -it --rm  -v "${PWD}:/golang" -w /golang golang:alpine sh
+    docker run -it --rm -e http_proxy=${http_proxy} -e https_proxy=${https_proxy} -e no_proxy=${no_proxy} -v "${PWD}:/golang" -w /golang golang:alpine sh
 }
 
 #

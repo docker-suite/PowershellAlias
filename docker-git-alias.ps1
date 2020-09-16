@@ -12,11 +12,11 @@ function Test-GitInstall {
 
 
 function Run-Git {
-    docker run -it --rm -v "${PWD}:/git" -w /git dsuite/maven bash -c "git $args"
+    docker run -it --rm -e http_proxy=${http_proxy} -e https_proxy=${https_proxy} -e no_proxy=${no_proxy} -v "${PWD}:/git" -w /git dsuite/maven bash -c "git $args"
 }
 
 function Run-GitBash {
-    docker run -it --rm -v "${PWD}:/git" -w /git dsuite/maven bash
+    docker run -it --rm -e http_proxy=${http_proxy} -e https_proxy=${https_proxy} -e no_proxy=${no_proxy} -v "${PWD}:/git" -w /git dsuite/maven bash
 }
 
 #

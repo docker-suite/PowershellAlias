@@ -12,22 +12,22 @@ function Test-NodeInstall {
 
 #
 function Run-Node {
-    docker run -it --rm  -v "${PWD}:/node" -w /node dsuite/alpine-nodejs:lts sh -c "node $args"
+    docker run -it --rm -e http_proxy=${http_proxy} -e https_proxy=${https_proxy} -e no_proxy=${no_proxy} -v "${PWD}:/node" -w /node dsuite/alpine-nodejs:lts sh -c "node $args"
 }
 
 #
 function Run-Npm {
-    docker run -it --rm  -v "${PWD}:/node" -w /node dsuite/alpine-nodejs:lts sh -c "npm $args"
+    docker run -it --rm -e http_proxy=${http_proxy} -e https_proxy=${https_proxy} -e no_proxy=${no_proxy} -v "${PWD}:/node" -w /node dsuite/alpine-nodejs:lts sh -c "npm $args"
 }
 
 #
 function Run-Yarn {
-    docker run -it --rm  -v "${PWD}:/node" -w /node dsuite/alpine-nodejs:lts bash -c "yarn $args"
+    docker run -it --rm -e http_proxy=${http_proxy} -e https_proxy=${https_proxy} -e no_proxy=${no_proxy} -v "${PWD}:/node" -w /node dsuite/alpine-nodejs:lts bash -c "yarn $args"
 }
 
 #
 function Run-NodeBash {
-    docker run -it --rm -v "${PWD}:/node" -w /node dsuite/alpine-nodejs:lts bash
+    docker run -it --rm -e http_proxy=${http_proxy} -e https_proxy=${https_proxy} -e no_proxy=${no_proxy} -v "${PWD}:/node" -w /node dsuite/alpine-nodejs:lts bash
 }
 
 #
