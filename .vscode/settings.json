@@ -1,0 +1,15 @@
+{
+    // Encodage par défaut
+    "files.encoding": "windows1252",
+    "files.eol": "\r\n",
+
+    // Association des fichiers
+    "files.associations": {
+        "*.ps1": "powershell",
+    },
+
+    "[powershell]": {
+        "files.encoding": "windows1252",
+        "files.eol": "\r\n",
+    },
+}

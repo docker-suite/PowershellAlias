@@ -47,4 +47,4 @@ Write-Output '' >> $dsuite
 # Add dsuite profil
 Write-Output "" >> $profile
 Write-Output "# Include dsuite profile" >> $profile
-Write-Output ". `"${dsuite}`"" >> $profile
+Write-Output ". `"$dsuite`"" >> $profile
