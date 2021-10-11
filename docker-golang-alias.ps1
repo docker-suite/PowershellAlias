@@ -12,22 +12,22 @@ function Test-GoInstall {
 
 #
 function Run-Go {
-    docker run -it --rm -e http_proxy=${http_proxy} -e https_proxy=${https_proxy} -e no_proxy=${no_proxy} -v "${PWD}:/golang" -w /golang golang:alpine sh -c "go $args"
+    docker run -it --rm -v "${PWD}:/golang" -w /golang golang:alpine sh -c "go $args"
 }
 
 function Run-GoBash {
-    docker run -it --rm -e http_proxy=${http_proxy} -e https_proxy=${https_proxy} -e no_proxy=${no_proxy} -v "${PWD}:/golang" -w /golang golang:alpine sh
+    docker run -it --rm -v "${PWD}:/golang" -w /golang golang:alpine sh
 }
 
 #
 if (test-path alias:go) {
-    Remove-Item alias:\go
+    Remove-Item alias:go
 }
 
 #
 if( (Test-GoInstall) -eq $true) {
     if (test-path alias:gobash) {
-        Remove-Item alias:\gobash
+        Remove-Item alias:gobash
     }
     New-Alias gobash Run-GoBash
 }
@@ -35,11 +35,11 @@ if( (Test-GoInstall) -eq $true) {
 #
 if( (Test-GoInstall) -eq $false) {
     if (test-path alias:go) {
-        Remove-Item alias:\go
+        Remove-Item alias:go
     }
     New-Alias go Run-Go
     if (test-path alias:gobash) {
-        Remove-Item alias:\gobash
+        Remove-Item alias:gobash
     }
     New-Alias gobash Run-GoBash
 }
