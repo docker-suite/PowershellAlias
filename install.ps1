@@ -44,6 +44,12 @@ Write-Output '# Include docker node alias' >> $dsuite
 Write-Output ". `"${script_folder}\docker-node-alias.ps1`"" >> $dsuite
 Write-Output '' >> $dsuite
 
+# Add docker portainer alias file
+Copy-Item "$PSScriptRoot\docker-portainer.ps1" "${script_folder}\docker-portainer.ps1"
+Write-Output '# Include docker portainer alias' >> $dsuite
+Write-Output ". `"${script_folder}\docker-portainer.ps1`"" >> $dsuite
+Write-Output '' >> $dsuite
+
 # Add dsuite profil
 Write-Output "" >> $profile
 Write-Output "# Include dsuite profile" >> $profile
