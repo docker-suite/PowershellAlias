@@ -43,7 +43,7 @@ if (!(test-path alias:drmi)) {
     New-Alias drmi Remove-DanglingImages
 }
 
-if (!(test-path alias:ddrmvs)) {
+if (!(test-path alias:drmv)) {
     New-Alias drmv Remove-DanglingVolumes
 }
 
